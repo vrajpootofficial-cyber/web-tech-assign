@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Practice Programs</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #8B0000 0%, #4A0404 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  color: white;
+  margin-bottom: 40px;
+  animation: fadeIn 0.8s ease-in;
+}
+
+.header h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+  letter-spacing: 2px;
+}
+
+.header p {
+  font-size: 1.1em;
+  opacity: 0.95;
+  letter-spacing: 1px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto 30px;
+}
+
+.card {
+  background: linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%);
+  padding: 20px;
+  border-radius: 20px;
+  border: 3px solid #C04848;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  animation: slideUp 0.5s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #8B0000, #DC143C, #8B0000);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.card:hover::before {
+  transform: translateX(0);
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(139,0,0,0.4);
+  border-color: #8B0000;
+}
+
+.card-header {
+  font-size: 1.15em;
+  font-weight: 700;
+  color: #8B0000;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-icon {
+  font-size: 1.5em;
+  filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.2));
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #8B0000;
+  background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 10px rgba(139,0,0,0.3);
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(139,0,0,0.5);
+  background: linear-gradient(135deg, #A52A2A 0%, #DC143C 100%);
+  border-color: #DC143C;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+#output {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px;
+  background: linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%);
+  border-radius: 20px;
+  border: 3px solid #C04848;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  font-size: 16px;
+  line-height: 1.8;
+  min-height: 100px;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.output-title {
+  font-size: 1.4em;
+  font-weight: 700;
+  color: #8B0000;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 3px solid #C04848;
+  padding-bottom: 10px;
+}
+
+.output-content {
+  color: #333;
+  font-size: 1.05em;
+}
+
+.result-emoji {
+  font-size: 1.6em;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 2em;
+  }
+  
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🚀 JavaScript Practice Programs</h1>
+  <p>Explore Conditional & Looping Concepts</p>
+</div>
+
+<div class="container">
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">🔢</span>Even / Odd</div>
+  <button onclick="evenOdd()">Check Number</button>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">📊</span>Largest of Two</div>
+  <button onclick="largest()">Find Largest</button>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">🎓</span>Grade Calculator</div>
+  <button onclick="grade()">Calculate Grade</button>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">📅</span>Day of Week</div>
+  <button onclick="day()">Get Day Name</button>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">🎫</span>Ticket Price</div>
+  <button onclick="ticket()">Calculate Price</button>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">🗓️</span>Leap Year</div>
+  <button onclick="leap()">Check Year</button>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">💰</span>Discount</div>
+  <button onclick="discount()">Calculate Discount</button>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">⚖️</span>BMI Calculator</div>
+  <button onclick="bmi()">Calculate BMI</button>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">🎮</span>Guess Game</div>
+  <button onclick="guess()">Play Game</button>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">🎯</span>FizzBuzz</div>
+  <button onclick="fizzbuzz()">Run FizzBuzz</button>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">❗</span>Factorial</div>
+  <button onclick="factorialUI()">Calculate</button>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">🔍</span>Armstrong Number</div>
+  <button onclick="armstrong()">Check Number</button>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">🔺</span>Pyramid Pattern</div>
+  <button onclick="pyramid()">Generate Pyramid</button>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">➕</span>Sum of 3 & 5</div>
+  <button onclick="sum35()">Calculate Sum</button>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">🔄</span>Palindrome</div>
+  <button onclick="palindrome()">Check Palindrome</button>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">🌀</span>Fibonacci</div>
+  <button onclick="fibonacci()">Generate Series</button>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="card-icon">🔐</span>Prime Check</div>
+  <button onclick="prime()">Check Prime</button>
+</div>
+
+</div>
+
+<div id="output">
+  <div class="output-title">👋 Welcome!</div>
+  <div class="output-content">Click any button above to run a program. Results will appear here.</div>
+</div>
+
+<script>
+function displayOutput(title, content, emoji = '✨') {
+  const output = document.getElementById('output');
+  output.innerHTML = `
+    <div class="output-title"><span class="result-emoji">${emoji}</span> ${title}</div>
+    <div class="output-content">${content}</div>
+  `;
+}
+
+function evenOdd() {
+  const num = parseInt(prompt('Enter a number:'));
+  if (isNaN(num)) {
+    displayOutput('Error', 'Please enter a valid number!', '❌');
+    return;
+  }
+  const result = num % 2 === 0 ? 'Even' : 'Odd';
+  const emoji = num % 2 === 0 ? '✅' : '🔵';
+  displayOutput('Even / Odd Result', `The number <b>${num}</b> is <b>${result}</b>`, emoji);
+}
+
+function largest() {
+  const num1 = parseFloat(prompt('Enter first number:'));
+  const num2 = parseFloat(prompt('Enter second number:'));
+  if (isNaN(num1) || isNaN(num2)) {
+    displayOutput('Error', 'Please enter valid numbers!', '❌');
+    return;
+  }
+  const result = num1 > num2 ? num1 : num2;
+  displayOutput('Largest Number', `The largest number between <b>${num1}</b> and <b>${num2}</b> is <b>${result}</b>`, '🏆');
+}
+
+function grade() {
+  const marks = parseFloat(prompt('Enter your marks (0-100):'));
+  if (isNaN(marks) || marks < 0 || marks > 100) {
+    displayOutput('Error', 'Please enter valid marks between 0 and 100!', '❌');
+    return;
+  }
+  let grade, emoji;
+  if (marks >= 90) { grade = 'A+'; emoji = '🌟'; }
+  else if (marks >= 80) { grade = 'A'; emoji = '⭐'; }
+  else if (marks >= 70) { grade = 'B'; emoji = '👍'; }
+  else if (marks >= 60) { grade = 'C'; emoji = '👌'; }
+  else if (marks >= 50) { grade = 'D'; emoji = '😐'; }
+  else { grade = 'F'; emoji = '😔'; }
+  displayOutput('Grade Result', `Marks: <b>${marks}</b><br>Grade: <b>${grade}</b>`, emoji);
+}
+
+function day() {
+  const dayNum = parseInt(prompt('Enter day number (1-7):'));
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  if (isNaN(dayNum) || dayNum < 1 || dayNum > 7) {
+    displayOutput('Error', 'Please enter a number between 1 and 7!', '❌');
+    return;
+  }
+  displayOutput('Day of Week', `Day <b>${dayNum}</b> is <b>${days[dayNum - 1]}</b>`, '📅');
+}
+
+function ticket() {
+  const age = parseInt(prompt('Enter your age:'));
+  if (isNaN(age) || age < 0) {
+    displayOutput('Error', 'Please enter a valid age!', '❌');
+    return;
+  }
+  let price, category;
+  if (age < 5) { price = 0; category = 'Free (Under 5)'; }
+  else if (age < 18) { price = 50; category = 'Child'; }
+  else if (age < 60) { price = 100; category = 'Adult'; }
+  else { price = 70; category = 'Senior'; }
+  displayOutput('Ticket Price', `Age: <b>${age}</b><br>Category: <b>${category}</b><br>Price: <b>₹${price}</b>`, '🎫');
+}
+
+function leap() {
+  const year = parseInt(prompt('Enter a year:'));
+  if (isNaN(year)) {
+    displayOutput('Error', 'Please enter a valid year!', '❌');
+    return;
+  }
+  const isLeap = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+  const emoji = isLeap ? '✅' : '❌';
+  displayOutput('Leap Year Check', `<b>${year}</b> is ${isLeap ? '' : 'NOT '}a leap year`, emoji);
+}
+
+function discount() {
+  const amount = parseFloat(prompt('Enter purchase amount:'));
+  if (isNaN(amount) || amount < 0) {
+    displayOutput('Error', 'Please enter a valid amount!', '❌');
+    return;
+  }
+  let discountPercent = 0;
+  if (amount >= 5000) discountPercent = 20;
+  else if (amount >= 2000) discountPercent = 10;
+  else if (amount >= 1000) discountPercent = 5;
+  
+  const discountAmount = (amount * discountPercent) / 100;
+  const finalAmount = amount - discountAmount;
+  displayOutput('Discount Calculator', 
+    `Original Amount: <b>₹${amount}</b><br>
+    Discount: <b>${discountPercent}%</b><br>
+    Discount Amount: <b>₹${discountAmount.toFixed(2)}</b><br>
+    Final Amount: <b>₹${finalAmount.toFixed(2)}</b>`, '💰');
+}
+
+function bmi() {
+  const weight = parseFloat(prompt('Enter your weight (kg):'));
+  const height = parseFloat(prompt('Enter your height (m):'));
+  if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+    displayOutput('Error', 'Please enter valid weight and height!', '❌');
+    return;
+  }
+  const bmiValue = (weight / (height * height)).toFixed(2);
+  let category, emoji;
+  if (bmiValue < 18.5) { category = 'Underweight'; emoji = '😟'; }
+  else if (bmiValue < 25) { category = 'Normal'; emoji = '😊'; }
+  else if (bmiValue < 30) { category = 'Overweight'; emoji = '😐'; }
+  else { category = 'Obese'; emoji = '😔'; }
+  displayOutput('BMI Result', `BMI: <b>${bmiValue}</b><br>Category: <b>${category}</b>`, emoji);
+}
+
+function guess() {
+  const target = Math.floor(Math.random() * 100) + 1;
+  let attempts = 0;
+  let guessed = false;
+  
+  while (attempts < 10 && !guessed) {
+    const guess = parseInt(prompt(`Guess the number (1-100). Attempt ${attempts + 1}/10:`));
+    if (isNaN(guess)) {
+      alert('Please enter a valid number!');
+      continue;
+    }
+    attempts++;
+    
+    if (guess === target) {
+      guessed = true;
+      displayOutput('Guess Game - You Won!', 
+        `🎉 Congratulations! You guessed the number <b>${target}</b> in <b>${attempts}</b> attempts!`, '🎉');
+    } else if (guess < target) {
+      alert('Too low! Try again.');
+    } else {
+      alert('Too high! Try again.');
+    }
+  }
+  
+  if (!guessed) {
+    displayOutput('Guess Game - Game Over', 
+      `😔 You ran out of attempts! The number was <b>${target}</b>`, '😔');
+  }
+}
+
+function fizzbuzz() {
+  let result = '';
+  for (let i = 1; i <= 50; i++) {
+    if (i % 15 === 0) result += 'FizzBuzz, ';
+    else if (i % 3 === 0) result += 'Fizz, ';
+    else if (i % 5 === 0) result += 'Buzz, ';
+    else result += i + ', ';
+  }
+  displayOutput('FizzBuzz (1-50)', result.slice(0, -2), '🎯');
+}
+
+function factorialUI() {
+  const num = parseInt(prompt('Enter a number:'));
+  if (isNaN(num) || num < 0) {
+    displayOutput('Error', 'Please enter a valid positive number!', '❌');
+    return;
+  }
+  let factorial = 1;
+  for (let i = 1; i <= num; i++) {
+    factorial *= i;
+  }
+  displayOutput('Factorial Result', `Factorial of <b>${num}</b> is <b>${factorial}</b>`, '❗');
+}
+
+function armstrong() {
+  const num = parseInt(prompt('Enter a number:'));
+  if (isNaN(num) || num < 0) {
+    displayOutput('Error', 'Please enter a valid number!', '❌');
+    return;
+  }
+  const str = num.toString();
+  const len = str.length;
+  let sum = 0;
+  for (let digit of str) {
+    sum += Math.pow(parseInt(digit), len);
+  }
+  const isArmstrong = sum === num;
+  const emoji = isArmstrong ? '✅' : '❌';
+  displayOutput('Armstrong Check', 
+    `<b>${num}</b> is ${isArmstrong ? '' : 'NOT '}an Armstrong number`, emoji);
+}
+
+function pyramid() {
+  const rows = parseInt(prompt('Enter number of rows:'));
+  if (isNaN(rows) || rows < 1 || rows > 20) {
+    displayOutput('Error', 'Please enter a number between 1 and 20!', '❌');
+    return;
+  }
+  let pattern = '<pre style="text-align:center; font-size:14px; line-height:1.5;">';
+  for (let i = 1; i <= rows; i++) {
+    pattern += ' '.repeat(rows - i) + '* '.repeat(i) + '\n';
+  }
+  pattern += '</pre>';
+  displayOutput('Pyramid Pattern', pattern, '🔺');
+}
+
+function sum35() {
+  const limit = parseInt(prompt('Enter the limit:'));
+  if (isNaN(limit) || limit < 1) {
+    displayOutput('Error', 'Please enter a valid positive number!', '❌');
+    return;
+  }
+  let sum = 0;
+  for (let i = 1; i < limit; i++) {
+    if (i % 3 === 0 || i % 5 === 0) {
+      sum += i;
+    }
+  }
+  displayOutput('Sum of Multiples', 
+    `Sum of all multiples of 3 or 5 below <b>${limit}</b> is <b>${sum}</b>`, '➕');
+}
+
+function palindrome() {
+  const str = prompt('Enter a string or number:');
+  if (!str) {
+    displayOutput('Error', 'Please enter a value!', '❌');
+    return;
+  }
+  const cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const reversed = cleaned.split('').reverse().join('');
+  const isPalindrome = cleaned === reversed;
+  const emoji = isPalindrome ? '✅' : '❌';
+  displayOutput('Palindrome Check', 
+    `<b>"${str}"</b> is ${isPalindrome ? '' : 'NOT '}a palindrome`, emoji);
+}
+
+function fibonacci() {
+  const n = parseInt(prompt('How many Fibonacci numbers?'));
+  if (isNaN(n) || n < 1 || n > 50) {
+    displayOutput('Error', 'Please enter a number between 1 and 50!', '❌');
+    return;
+  }
+  let fib = [0, 1];
+  for (let i = 2; i < n; i++) {
+    fib.push(fib[i - 1] + fib[i - 2]);
+  }
+  const series = fib.slice(0, n).join(', ');
+  displayOutput('Fibonacci Series', `First <b>${n}</b> numbers: ${series}`, '🌀');
+}
+
+function prime() {
+  const num = parseInt(prompt('Enter a number:'));
+  if (isNaN(num) || num < 2) {
+    displayOutput('Error', 'Please enter a number greater than 1!', '❌');
+    return;
+  }
+  let isPrime = true;
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      isPrime = false;
+      break;
+    }
+  }
+  const emoji = isPrime ? '✅' : '❌';
+  displayOutput('Prime Check', `<b>${num}</b> is ${isPrime ? '' : 'NOT '}a prime number`, emoji);
+}
+</script>
+
+</body>
+</html>
